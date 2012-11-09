@@ -40,7 +40,7 @@ class sxid(
   }
 
   cron { 'sxid':
-    command => '/usr/bin/sxid &> /dev/null',
+    command => '/usr/bin/nice -n 19 /usr/bin/sxid &> /dev/null',
     user    => 'root',
     hour    => fqdn_rand(6),
     minute  => fqdn_rand(59),

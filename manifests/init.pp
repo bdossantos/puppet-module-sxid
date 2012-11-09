@@ -11,7 +11,8 @@ class sxid(
   $listall = 'no',
   $ignore_dirs = ['/home'],
   $extra_list = [],
-  $mail = '/usr/bin/mail'
+  $mail = '/usr/bin/mail',
+  $nice = 19
 ){
 
   package { 'sxid':
@@ -40,7 +41,7 @@ class sxid(
   }
 
   cron { 'sxid':
-    command => '/usr/bin/nice -n 19 /usr/bin/sxid &> /dev/null',
+    command => "/usr/bin/nice -n ${sxid::nice} /usr/bin/ionice -c 3 /usr/bin/sxid &> /dev/null",
     user    => 'root',
     hour    => fqdn_rand(6),
     minute  => fqdn_rand(59),
@@ -48,7 +49,9 @@ class sxid(
   }
 
   exec { 'sxid':
-    command     => 'nohup nice -n 19 sxid &',
+    command     => "nohup nice -n ${sxid::nice} \
+                    ionice -c 3 \
+                    sxid &",
     path        => '/usr/bin/:/bin/',
     cwd         => '/tmp',
     subscribe   => File['/etc/sxid.conf'],

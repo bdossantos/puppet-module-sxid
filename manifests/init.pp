@@ -51,7 +51,7 @@ class sxid(
   exec { 'sxid':
     command     => "nohup nice -n ${sxid::nice} \
                     ionice -c 3 \
-                    sxid &",
+                    sxid &> /dev/null &",
     path        => '/usr/bin/:/bin/',
     cwd         => '/tmp',
     subscribe   => File['/etc/sxid.conf'],

@@ -1,3 +1,54 @@
+# == Class : sxid
+#
+# Full description of class integrit here.
+#
+# === Parameters
+#
+# $search         Root search path
+#
+# $exclude        Following directories would be exclude from searching
+#
+# $email          Address where to send reports to
+#
+# $always_notify  Always send reports even if nothing changed
+#
+# $log_file       Log path
+#
+# $keep_log       Number of log archive to keep
+#
+# $always_rotate  Rotate the logs even when there are no changes
+#
+# $forbidden      Directories where +s is forbidden
+#
+# $enforce        Remove (-s) files found in forbidden directories
+#
+# $listall        This implies ALWAYS_NOTIFY. It will send a full list of
+#                 entries along with the changes
+#
+# $ignore_dirs    Ignore entries for directories in these paths
+#
+# $extra_list     File that contains a list of other files that sxid should
+#                 monitor
+#
+# $mail           Mail programm path
+#
+# $nice           Niceness which affects process scheduling of check
+#
+# === Examples
+#
+# class { 'sxid':
+#   email         => 'admin@domain.tld',
+#   always_notify => 'yes',
+#   keep_logs     => 10,
+#   exclude       => ['/proc', '/mnt', '/cdrom', '/floppy'],
+#   ignore_dirs   => ['/home', '/root'],
+#   forbidden     => ['/home', '/tmp'],
+# }
+#
+# === Authors
+#
+# Benjamin Dos Santos <benjamin.dossantos@gmail.com>
+#
 class sxid(
   $search = '/',
   $exclude = ['/proc', '/mnt', '/cdrom', '/floppy'],

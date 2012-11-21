@@ -1,6 +1,7 @@
 # == Class : sxid
 #
-# Full description of class integrit here.
+# Module for configuring sXid
+# This program tracks any changes in your s[ug]id files and folders
 #
 # === Parameters
 #
